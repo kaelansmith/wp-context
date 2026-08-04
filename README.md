@@ -6,6 +6,8 @@ A single-class utility to check the current request context in WordPress sites.
 [![PHP Quality Assurance](https://github.com/inpsyde/wp-context/actions/workflows/qa.yml/badge.svg)](https://github.com/inpsyde/wp-context/actions/workflows/qa.yml)
 ---
 
+
+
 ## How to use
 
 This is a Composer package, not a plugin, so first it needs to be installed via Composer.
@@ -49,6 +51,8 @@ The full list of contexts that can be checked is:
 - `->is(WpContext::INSTALLING)` / `->isInstalling()`
 - `->is(WpContext::WP_ACTIVATE)` / `->isWpActivate()`
 
+
+
 ### About "core" and "installing" contexts
 
 `WpContext::isCore()` checks for the constants `ABSPATH` being defined, which means that it will normally be true when all the check for other contexts is also true, but `WpContext::isInstalling()` is an exception to that (more on this below).
@@ -72,6 +76,8 @@ if (Inpsyde\WpContext::determine()->isCore()) {
 
 which might look very fine, could break if `WP_INSTALLING` is true, considering in that case the options table might not be there at all. Thanks to the fact that `WpContext::isCore()` returns false when `WP_INSTALLING` is true the `get_option` call above is not executed during installation (when
 it is not safe to call).
+
+
 
 ### About "installing" and "activate" contexts
 
@@ -137,6 +143,11 @@ assert($context->isWpCli());
 ```
 
 Note that `$context->force(WpContext::CLI)` can still be used to "simulate" requests that are _only_ WP CLI, not even `CORE`.
+
+## Requirements
+
+- WordPress 6.1+
+- PHP 7.4+
 
 ## Copyright and License
 
