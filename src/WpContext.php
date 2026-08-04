@@ -106,7 +106,7 @@ class WpContext implements \JsonSerializable
     {
         /** @psalm-suppress RedundantCondition */
         $isRestRequest = defined('REST_REQUEST') && REST_REQUEST;
-        if ($isRestRequest || !empty($_GET['rest_route'])) { // phpcs:ignore
+        if ($isRestRequest || ((bool) ($_GET['rest_route'] ?? false))) { // phpcs:ignore
             return true;
         }
 
@@ -350,7 +350,6 @@ class WpContext implements \JsonSerializable
         ];
 
         foreach ($this->actionCallbacks as $action => $callback) {
-            /** @psalm-suppress MixedArgument */
             add_action($action, $callback, self::ACTIONS_PRIORITY);
         }
     }
@@ -364,7 +363,6 @@ class WpContext implements \JsonSerializable
     private function removeActionHooks(): void
     {
         foreach ($this->actionCallbacks as $action => $callback) {
-            /** @psalm-suppress MixedArgument */
             remove_action($action, $callback, self::ACTIONS_PRIORITY);
         }
         $this->actionCallbacks = [];
