@@ -3,7 +3,7 @@
 A single-class utility to check the current request context in WordPress sites.
 
 ---
-![PHP Quality Assurance](https://github.com/inpsyde/wp-context/workflows/PHP%20Quality%20Assurance/badge.svg)
+[![PHP Quality Assurance](https://github.com/inpsyde/wp-context/actions/workflows/qa.yml/badge.svg)](https://github.com/inpsyde/wp-context/actions/workflows/qa.yml)
 ---
 
 
@@ -144,28 +144,14 @@ assert($context->isWpCli());
 
 Note that `$context->force(WpContext::CLI)` can still be used to "simulate" requests that are _only_ WP CLI, not even `CORE`.
 
-
-
 ## Requirements
 
 - WordPress 6.1+
 - PHP 7.4+
 
+## Copyright and License
 
-
-## Crafted by Inpsyde
-
-The team at [Inpsyde](https://inpsyde.com) is engineering the Web since 2006.
-
-
-
-## License
-
-Copyright (c) 2024 Inpsyde GmbH
-
-This library is released under ["GPL 2.0 or later" License](LICENSE).
-
-
+This package is [free software](https://www.gnu.org/philosophy/free-sw.en.html) distributed under the terms of the GNU General Public License version 2 or (at your option) any later version. For the full license, see [LICENSE](./LICENSE).
 
 ## Contributing
 
