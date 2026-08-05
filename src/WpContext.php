@@ -18,7 +18,6 @@ class WpContext implements \JsonSerializable
     public const XML_RPC = 'xml-rpc';
     public const WP_ACTIVATE = 'wp-activate';
 
-    private const ACTIONS_PRIORITY = -300982;
     private const ALL = [
         self::AJAX,
         self::BACKOFFICE,
@@ -350,7 +349,14 @@ class WpContext implements \JsonSerializable
         ];
 
         foreach ($this->actionCallbacks as $action => $callback) {
-            add_action($action, $callback, self::ACTIONS_PRIORITY);
+            /*
+             * PHP_INT_MIN is required here: these callbacks remove themselves while their
+             * own hook is still running, which only safely continues to the next callback
+             * when the removed priority is the lowest one registered on the hook.
+             * @see https://core.trac.wordpress.org/ticket/40393
+             */
+            // phpcs:ignore Inpsyde.CodeQuality.HookPriority.HookPriority
+            add_action($action, $callback, PHP_INT_MIN);
         }
     }
 
@@ -363,7 +369,7 @@ class WpContext implements \JsonSerializable
     private function removeActionHooks(): void
     {
         foreach ($this->actionCallbacks as $action => $callback) {
-            remove_action($action, $callback, self::ACTIONS_PRIORITY);
+            remove_action($action, $callback, PHP_INT_MIN);
         }
         $this->actionCallbacks = [];
     }
