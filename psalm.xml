@@ -26,8 +26,7 @@
         <MixedAssignment errorLevel="suppress" />
         <RedundantCastGivenDocblockType errorLevel="suppress" />
         <MissingClassConstType errorLevel="suppress" />
-        <!-- Psalm 6+: keep non-final for BC; Override attribute requires PHP 8.3+. -->
-        <ClassMustBeFinal errorLevel="suppress" />
+        <!-- Package still supports PHP 7.4, so #[\Override] cannot be used yet. -->
         <MissingOverrideAttribute errorLevel="suppress" />
     </issueHandlers>
 </psalm>
