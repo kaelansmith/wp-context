@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Inpsyde;
 
-final class WpContext implements \JsonSerializable
+class WpContext implements \JsonSerializable
 {
     public const AJAX = 'ajax';
     public const BACKOFFICE = 'backoffice';
